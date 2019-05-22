@@ -11,7 +11,8 @@ export default (state = initialState, action) => {
     case FETCH_REPOS:
       return {
         ...state,
-        items: action.payload
+        items: action.payload,
+        message: action.message
       }
     default:
       return state;

@@ -6,13 +6,23 @@ import api from '../api';
 export const fetchRepos = (token) => dispatch => {
   if (!token) return;
   const response = ApiService.apiCall(api.repos, 'GET', token);
+
   return response.then(repos => {
-    console.log(repos.body)
-     dispatch({
-      type: FETCH_REPOS,
-      payload: repos.body
-    })
-    history.push(`/dashboard/${token}`);
+    if(repos.status === 200)  {
+      history.push(`/dashboard/${token}`);
+      dispatch({
+        type: FETCH_REPOS,
+        payload: repos.body
+      })
+    } else {
+      dispatch({
+        type: FETCH_REPOS,
+        message: repos.body.message
+      })
+    }
+   
+    console.log(repos)
+
   }).catch(error => {
     console.log(error)
     ApiService.handleCommonError(response);
