@@ -1,0 +1,31 @@
+.h1 {
+  font-weight: 300;
+  font-size: 45px;
+  line-height: 56px;
+  color: #32325d;
+  letter-spacing: -.01em;
+  margin-bottom: 0.5rem;
+}
+
+.h2 {
+  color: #6772e5;
+  font-size: 20px;
+  line-height: 28px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: .025em;
+  white-space: normal;
+  margin-bottom: 0.5rem;
+}
+
+@media only screen and (max-width: 767px) {
+  .h1 {
+    font-size: 25px;
+    line-height: 16px;
+  }
+
+  .h2 {
+    font-size: 15px;
+    line-height: 8px;
+  }
+}
