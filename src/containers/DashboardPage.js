@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { fetchRepos } from '../actions/repoActions';
+import { fetchIssues } from '../actions/issueActions';
 import Title from '../components/Title/Title';
 import Card from '../components/Card/Card';
 import Divider from '../components/Divider/Divider';
@@ -9,9 +10,27 @@ import { Col } from 'react-flexbox-grid';
 
 class DashboardPage extends Component {
 
+  constructor() {
+    super();
+    this.handleFetchIssues = this.handleFetchIssues.bind(this);
+    this.handleLayout = this.handleLayout.bind(this);
+  }
   componentDidMount() {
     const { token } = this.props.match.params;
     this.props.fetchRepos(token);
+  }
+
+  handleFetchIssues(e, repoName) {
+    const { token } = this.props.match.params;
+    this.props.fetchIssues(token, repoName)
+  }
+
+  handleLayout(issues) {
+    if(issues) {
+      return 6;
+    } else {
+      return 12;
+    }
   }
 
   render() {
@@ -20,12 +39,12 @@ class DashboardPage extends Component {
         <Col xs={12}>
           <Title>Dashboard</Title>
         </Col>
-        <Col xs={12}>
+        <Col xs={12} md={this.handleLayout(this.props.issues)}>
           <Card>
             {this.props.repos && this.props.repos.length ? this.props.repos.map((item, index) => (
               <React.Fragment key={index}>
                 <Title variant="h2">{item.full_name}</Title>
-                <Button color="primary">See Issues</Button>
+                <Button onClick={(e) => this.handleFetchIssues(e,item.full_name)} color="primary">See Issues</Button>
                 <span>Open Issues: {item.open_issues}</span>
                 <Divider />
               </React.Fragment>
@@ -33,12 +52,24 @@ class DashboardPage extends Component {
             }
           </Card>
         </Col>
+        { this.props.issues &&  <Col xs={12} md={this.handleLayout(this.props.issues)}>
+          <Card>
+            { this.props.issues.length ? this.props.issues.map((item, index) => (
+                <React.Fragment key={index}>
+                  <Title variant="h3">{item.title}</Title>
+                  <Divider />
+                </React.Fragment>
+              )) : <Title variant="h2">No Issues Available</Title>
+            }
+            </Card>
+        </Col> }
       </React.Fragment>
     )
   }
 }
 
 const mapStateToProps = state => ({
-  repos: state.repos.items
+  repos: state.repos.items,
+  issues: state.issues.items
 })
-export default connect(mapStateToProps, { fetchRepos })(DashboardPage)
+export default connect(mapStateToProps, { fetchRepos, fetchIssues })(DashboardPage)

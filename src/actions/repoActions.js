@@ -5,7 +5,7 @@ import api from '../api';
 
 export const fetchRepos = (token) => dispatch => {
   if (!token) return;
-  const response = ApiService.apiCall(api.repos, 'GET', token);
+  const response = ApiService.apiCall(`${api.user}/repos`, 'GET', token);
 
   return response.then(repos => {
     if(repos.status === 200)  {
