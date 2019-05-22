@@ -1,0 +1,10 @@
+
+.card {
+  z-index: calc(500 - 1);
+  position: relative;
+  justify-content: center;
+  overflow: hidden;
+  padding: 20px;
+  background-color: #fff;
+  border: 1px solid #c2c2ce;
+}
