@@ -6,6 +6,7 @@ import Title from '../components/Title/Title';
 import Card from '../components/Card/Card';
 import Divider from '../components/Divider/Divider';
 import Button from '../components/Button/Button';
+import Avatar from '../components/Avatar/Avatar';
 import { Col } from 'react-flexbox-grid';
 
 class DashboardPage extends Component {
@@ -52,11 +53,12 @@ class DashboardPage extends Component {
             }
           </Card>
         </Col>
-        { this.props.issues &&  <Col xs={12} md={this.handleLayout(this.props.issues)}>
+        { this.props.issues && <Col xs={12} md={this.handleLayout(this.props.issues)}>
           <Card>
             { this.props.issues.length ? this.props.issues.map((item, index) => (
                 <React.Fragment key={index}>
                   <Title variant="h3">{item.title}</Title>
+                  <Avatar image={item.user.avatar_url} size="xs" alt="avatar"/>
                   <Divider />
                 </React.Fragment>
               )) : <Title variant="h2">No Issues Available</Title>

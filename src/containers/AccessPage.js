@@ -35,7 +35,7 @@ class AccessPage extends Component {
               name="token" 
               placeholder="Enter Your GitHub Access Token" 
               title="Your GitHub Access Token"
-              size="lg"
+              size="md"
               required={true}
               handleChange={this.handleChange}
               error={this.props.message}

@@ -3,14 +3,14 @@ import styles from './Input.module.css';
 
 const Size = (size) => {
   switch(size) {
+    case 'xs':
+     return styles.xs
     case 'sm':
      return styles.sm
     case 'md':
      return styles.md
     case 'lg':
      return styles.lg
-    case 'xl':
-     return styles.xl
     default:
       return size
   }
