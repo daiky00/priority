@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Col } from 'react-flexbox-grid';
 import { fetchRepos } from '../actions/repoActions';
 import { fetchIssues } from '../actions/issueActions';
 import Title from '../components/Title/Title';
@@ -7,7 +8,8 @@ import Card from '../components/Card/Card';
 import Divider from '../components/Divider/Divider';
 import Button from '../components/Button/Button';
 import Avatar from '../components/Avatar/Avatar';
-import { Col } from 'react-flexbox-grid';
+import Key from '../components/Key/Key';
+
 
 class DashboardPage extends Component {
 
@@ -27,6 +29,7 @@ class DashboardPage extends Component {
   }
 
   handleLayout(issues) {
+    window.scroll({top: 0, left: 0, behavior: 'smooth' })
     if(issues) {
       return 6;
     } else {
@@ -46,7 +49,7 @@ class DashboardPage extends Component {
               <React.Fragment key={index}>
                 <Title variant="h2">{item.full_name}</Title>
                 <Button onClick={(e) => this.handleFetchIssues(e,item.full_name)} color="primary">See Issues</Button>
-                <span>Open Issues: {item.open_issues}</span>
+                <Key label="Open Issues:" value={item.open_issues} />
                 <Divider />
               </React.Fragment>
             )) : <Title variant="h2">No Repos Available</Title>
@@ -59,6 +62,8 @@ class DashboardPage extends Component {
                 <React.Fragment key={index}>
                   <Title variant="h3">{item.title}</Title>
                   <Avatar image={item.user.avatar_url} size="xs" alt="avatar"/>
+                  <Key label="Created At:" value={item.created_at} />
+                  <Key label="Updated At:" value={item.updated_at} />
                   <Divider />
                 </React.Fragment>
               )) : <Title variant="h2">No Issues Available</Title>
