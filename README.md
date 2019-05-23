@@ -1,3 +1,7 @@
+## Get Your Personal Github Token
+
+Get Your Personal Github Token Key before installing the project from [here](https://github.com/settings/tokens)
+
 ## Available Scripts
 
 In the project directory, you can run:
