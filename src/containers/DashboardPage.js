@@ -9,6 +9,8 @@ import Divider from '../components/Divider/Divider';
 import Button from '../components/Button/Button';
 import Avatar from '../components/Avatar/Avatar';
 import Key from '../components/Key/Key';
+import moment from 'moment';
+import 'moment/min/locales';
 
 
 class DashboardPage extends Component {
@@ -62,8 +64,8 @@ class DashboardPage extends Component {
                 <React.Fragment key={index}>
                   <Title variant="h3">{item.title}</Title>
                   <Avatar image={item.user.avatar_url} size="xs" alt="avatar"/>
-                  <Key label="Created At:" value={item.created_at} />
-                  <Key label="Updated At:" value={item.updated_at} />
+                  <Key label="Created At:" value={moment(item.created_at).format('MM/DD/YYYY')} />
+                  <Key label="Updated At:" value={moment(item.updated_at).fromNow()} />
                   <Divider />
                 </React.Fragment>
               )) : <Title variant="h2">No Issues Available</Title>
